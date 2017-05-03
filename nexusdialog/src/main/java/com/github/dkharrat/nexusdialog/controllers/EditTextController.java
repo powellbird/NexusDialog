@@ -20,6 +20,7 @@ public class EditTextController extends LabeledFieldController {
 
     private int inputType;
     private final String placeholder;
+    private  boolean enableonoff = true;
 
     /**
      * Constructs a new instance of an edit text field.
@@ -79,6 +80,21 @@ public class EditTextController extends LabeledFieldController {
      */
     public EditTextController(Context ctx, String name, String labelText, String placeholder, boolean isRequired) {
         this(ctx, name, labelText, placeholder, isRequired, InputType.TYPE_CLASS_TEXT);
+    }
+
+    /**
+     * Constructs a new instance of an edit text field.
+     *
+     * @param ctx           the Android context
+     * @param name          the name of the field
+     * @param labelText     the label to display beside the field
+     * @param placeholder   a placeholder text to show when the input field is empty. If null, no placeholder is displayed
+     * @param isRequired    indicates if the field is required or not
+     * @param enebleonoff   Enable or disable  the control
+     */
+    public EditTextController(Context ctx, String name, String labelText, String placeholder, boolean isRequired,boolean enebleonoff) {
+        this(ctx, name, labelText, placeholder, isRequired, InputType.TYPE_CLASS_TEXT);
+        this.enableonoff = enebleonoff;
     }
 
     /**
@@ -174,6 +190,7 @@ public class EditTextController extends LabeledFieldController {
     protected View createFieldView() {
         final EditText editText = new EditText(getContext());
         editText.setId(editTextId);
+        editText.setEnabled(enableonoff);
 
         editText.setSingleLine(!isMultiLine());
         if (placeholder != null) {
